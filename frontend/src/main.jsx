@@ -2,7 +2,20 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ErrorPage, Home } from "./pages/index.js";
+import {
+  AccountPage,
+  BagPage,
+  CategoryPage,
+  ErrorPage,
+  HomePage,
+  LoginPage,
+  ProductDetailPage,
+  ProductPage,
+  RegisterPage,
+  WishListPage,
+} from "./pages/index.js";
+import { Provider } from "react-redux";
+import { store } from "./RTK/store/store.js";
 
 const router = createBrowserRouter([
   {
@@ -10,19 +23,20 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <Home /> },
-      // { path: "/login", element: <LoginPage /> },
-      // { path: "/login/otp-login", element: <OTPLogin /> },
-      // { path: "/wishlist", element: <Wishlist /> },
-      // { path: "/product", element: <ProductPage /> },
-      // { path: "/product/:productId", element: <ProductDetails /> },
-      // { path: "/product/men-tshirts", element: <MenTshirts /> },
-      // { path: "/product/men-casual-shirts", element: <MenCasualShirts /> },
-      // { path: "/product/men-formal-shirts", element: <MenFormalShirts /> },
-      // { path: "/product/men-sweat-shirts", element: <MenSweatShirts /> },
+      { path: "/", element: <HomePage /> },
+      { path: "/products", element: <ProductPage /> },
+      { path: "/products/:productId", element: <ProductDetailPage /> },
+      { path: "/category/:categoryId", element: <CategoryPage /> },
+      { path: "/bag", element: <BagPage /> },
+      { path: "/wishlist", element: <WishListPage /> },
+      { path: "/account", element: <AccountPage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/register", element: <RegisterPage /> },
     ],
   },
 ]);
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

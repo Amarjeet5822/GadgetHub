@@ -1,9 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { FooterPage, Navbar } from "./components/layout";
+import { useEffect } from "react";
 
 
 function App() {
-
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <>
       <div className="sticky top-0 z-50 bg-white w-full">

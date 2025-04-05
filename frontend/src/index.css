@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@utility textOrange {
+  @apply  text-orange-500
+}
+@utility textBlue {
+  @apply  text-blue-500
+}
+
+@theme {
+  --color-404found: #1F75FE;
+  --color-primary: #0066cc;
+  --color-primary-dark:#003366;
+}
+
