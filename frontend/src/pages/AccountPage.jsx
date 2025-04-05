@@ -15,7 +15,7 @@ const AccountPage = () => {
   const [formData, setFormData] = useState({
     name: data?.name || '',
     email: data?.email || '',
-    mobileNumber: data?.phone || '',
+    mobileNumber: data?.mobileNumber || '',
     address: data?.address || '',
   });
   
@@ -61,6 +61,7 @@ const AccountPage = () => {
     const fetchGetUser = async () => {
       try {
         await dispatch(getUser()).unwrap();
+        // console.log("data => ", data )
         setFormData(data)
       } catch (error) {
         console.log("failed to get User")
@@ -187,7 +188,7 @@ const AccountPage = () => {
                     </span>
                     <input 
                       type="tel"
-                      name="phone"
+                      name="mobileNumber"
                       value={formData.mobileNumber}
                       onChange={handleChange}
                       className="block w-full border-0 p-3 focus:outline-none focus:ring-0"

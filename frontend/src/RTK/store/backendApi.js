@@ -1,4 +1,5 @@
-export const api = "https://gadgethub-xdmd.onrender.com"
+// export const api = "https://gadgethub-xdmd.onrender.com"
+export const api = "http://localhost:8080"
 
 export const categories = [
   {
