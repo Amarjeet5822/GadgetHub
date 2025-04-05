@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const { connectDB } = require("./config/dbConnection.js");
 const AppError = require("./utils/AppError.js");
 const routes = require("./routes/indexRoute.js");
+const { IsUserAuthenticated } = require("./middleware/authMiddleware.js");
 
 dotenv.config();
 
@@ -35,9 +36,18 @@ app.use(cors(corsOptionsDelegate));
 
 app.use( routes);
 
+
+app.get("/auth/status", IsUserAuthenticated, (req, res, next) => {
+  try {
+    res.status(200).json({isAuthenticated: true});
+  } catch (error) {
+    next(new AppError(500, error?.message || "Failed to get Status",{ isAuthenticated: false}))
+  }
+});
+
 app.use((req, res, next) => {
   next(new AppError(404, `Can't find ${req.originalUrl} on this server!`));
-})
+});
 
 // ✅ Global Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -52,4 +62,4 @@ const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
   connectDB();
   console.log( `app running at http://localhost:${PORT}`)
-})
+});

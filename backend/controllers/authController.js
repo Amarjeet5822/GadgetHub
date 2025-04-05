@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 dotenv.config();
 
 const UserSignup = async (req, res, next ) => {
+  console.log("UserSignup (req.body) :=>", req.body)
   const {email, password, name } = req.body;
   try {
     const salt = bcrypt.genSaltSync(10);
@@ -75,7 +76,7 @@ const UserUpdateDetails = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "User updated successfully",
+      message: "User  updated successfully",
       user: updatedUser,
     });
 
